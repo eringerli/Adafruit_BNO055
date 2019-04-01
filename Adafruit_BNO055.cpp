@@ -880,9 +880,9 @@ bool Adafruit_BNO055::readLen(adafruit_bno055_reg_t reg, byte *buffer,
   _wire->send(reg);
 #endif
   _wire->endTransmission();
-  _wire->requestFrom(_address, (byte)len);
+  uint8_t cnt = _wire->requestFrom(_address, (byte)len);
 
-  for (uint8_t i = 0; i < len; i++) {
+  for (uint8_t i = 0; i < cnt; i++) {
 #if ARDUINO >= 100
     buffer[i] = _wire->read();
 #else
