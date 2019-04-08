@@ -202,6 +202,20 @@ public:
 
     Vector<3> toAngularVelocity(double dt) const
     {
+      void fromEuler( float x, float y, float z ) {
+        float c1 = cos( y / 2 );
+        float c2 = cos( z / 2 );
+        float c3 = cos( x / 2 );
+
+        float s1 = sin( y / 2 );
+        float s2 = sin( z / 2 );
+        float s3 = sin( x / 2 );
+        _w = c1 * c2 * c3 - s1 * s2 * s3;
+        _x = s1 * s2 * c3 + c1 * c2 * s3;
+        _y = s1 * c2 * c3 + c1 * s2 * s3;
+        _z = c1 * s2 * c3 - s1 * c2 * s3;
+      }
+
         Vector<3> ret;
         Quaternion one(1.0, 0.0, 0.0, 0.0);
         Quaternion delta = one - *this;
